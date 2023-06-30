@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import { Grid, TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { addRole, editRole } from '../../redux/rolesSlice';
+import roleValidation from '../../utils/validationSchema/roleValidation';
 
 const style = {
     position: 'absolute',
@@ -51,13 +52,7 @@ const RoleModal = ({ open, setOpen, data }) => {
                                 dispatch(data ? editRole({...values, id: data.id }) : addRole({ ...values }));
                                 setOpen(false)
                             }}
-                            validationSchema={Yup.object().shape({
-                                label: Yup.string()
-                                    .required('Role label is a required'),
-                                key: Yup.string()
-                                    .required('Role key is a required'),
-
-                            })}
+                            validationSchema={roleValidation}
                         >
                             {(props) => {
                                 const {

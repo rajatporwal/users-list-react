@@ -1,6 +1,5 @@
 import React from 'react';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -15,6 +14,7 @@ import Select from '@mui/material/Select';
 import { Grid, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, editUser } from '../../redux/usersSlice';
+import userValidation from '../../utils/validationSchema/userValidation';
 
 const style = {
     position: 'absolute',
@@ -26,8 +26,6 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-
-const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
 
 const UserModal = ({ open, setOpen, data }) => {
     const dispatch = useDispatch();
@@ -61,15 +59,7 @@ const UserModal = ({ open, setOpen, data }) => {
                                 dispatch(data ? editUser({ ...values, id: data.id }) : addUser({ ...values }));
                                 setOpen(false)
                             }}
-                            validationSchema={Yup.object().shape({
-                                name: Yup.string().required(),
-                                email: Yup.string().email().required(),
-                                username: Yup.string().required(),
-                                mobile: Yup.string().length(10).matches(phoneRegExp, 'Phone number is not valid').required(),
-                                key: Yup.string().required(),
-                                password: Yup.string().required(),
-
-                            })}
+                            validationSchema={userValidation}
                         >
                             {(props) => {
                                 const {
