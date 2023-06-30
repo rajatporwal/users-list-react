@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-import AddTodo from './components/AddTodo';
 import Roles from './components/Roles';
 import Users from './components/Users';
 import store from './redux/store';
@@ -12,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App><AddTodo /></App>,
+    element: <App><Roles /></App>,
   },
   {
     path: "/roles",

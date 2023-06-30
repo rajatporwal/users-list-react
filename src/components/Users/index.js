@@ -21,8 +21,8 @@ const Users = () => {
             </Box>
             {
                 users.length ? <UsersList users={users} /> : <Typography variant="body1" component="h2" textAlign="center" sx={{ marginTop: 10 }}>
-                    {roles.length ? 'Please add user role, to add new user' :
-                        'No users to display'
+                    {roles.length ? 'No users to display' :
+                        'Please add user role, to add new user'
                     }</Typography>
             }
         </Paper>
