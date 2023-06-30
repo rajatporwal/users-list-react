@@ -25,8 +25,8 @@ const style = {
 const RoleModal = ({ open, setOpen, data }) => {
     const dispatch = useDispatch();
     const initalValues = data
-        ? { roleLabel: data.label, roleKey: data.key }
-        : { roleLabel: '', roleKey: '' }
+        ? { label: data.label, key: data.key }
+        : { label: '', key: '' }
 
     return (
         <>
@@ -52,9 +52,9 @@ const RoleModal = ({ open, setOpen, data }) => {
                                 setOpen(false)
                             }}
                             validationSchema={Yup.object().shape({
-                                roleLabel: Yup.string()
+                                label: Yup.string()
                                     .required('Role label is a required'),
-                                roleKey: Yup.string()
+                                key: Yup.string()
                                     .required('Role key is a required'),
 
                             })}
@@ -77,22 +77,22 @@ const RoleModal = ({ open, setOpen, data }) => {
                                             </Typography>
                                             <TextField
                                                 label="Role Label"
-                                                name="roleLabel"
-                                                value={values.roleLabel}
+                                                name="label"
+                                                value={values.label}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                error={errors.roleLabel && touched.roleLabel}
-                                                helperText={(errors.roleLabel && touched.roleLabel) && errors.roleLabel}
+                                                error={errors.label && touched.label}
+                                                helperText={(errors.label && touched.label) && errors.label}
                                                 margin="normal"
                                             />
                                             <TextField
                                                 label="Role Key"
-                                                name="roleKey"
-                                                value={values.roleKey}
+                                                name="key"
+                                                value={values.key}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                error={errors.roleKey && touched.roleKey}
-                                                helperText={(errors.roleKey && touched.roleKey) && errors.roleKey}
+                                                error={errors.key && touched.key}
+                                                helperText={(errors.key && touched.key) && errors.key}
                                                 margin="normal"
                                             />
                                         </Grid>

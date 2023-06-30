@@ -7,8 +7,7 @@ export const rolesSlice = createSlice({
         addRole: (state, action) => {
             const newRole = {
                 id: Date.parse(new Date()),
-                label: action.payload.roleLabel,
-                key: action.payload.roleKey
+                ...action.payload,
             }
             state.push(newRole);
         },
@@ -16,8 +15,7 @@ export const rolesSlice = createSlice({
             const newRole = state.map((item) => item.id === action.payload.id ?
                 {
                     ...item,
-                    label: action.payload.roleLabel,
-                    key: action.payload.roleKey
+                    ...action.payload
                 }
                 :
                 item

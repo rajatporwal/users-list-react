@@ -17,7 +17,7 @@ const Roles = () => {
         <Paper sx={{ p: 5, width: "100%", maxWidth: '800px' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography variant="h6" component="h2">Roles List</Typography>
-                <Button variant="contained" onClick={() => setOpen(true)} setOpen={setOpen}>
+                <Button variant="contained" onClick={() => setOpen(true)}>
                     Add Role
                 </Button>
             </Box>

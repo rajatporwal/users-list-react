@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import AddTodo from './components/AddTodo';
 import Roles from './components/Roles';
-import Users from './components/Users/Users';
+import Users from './components/Users';
 import store from './redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
