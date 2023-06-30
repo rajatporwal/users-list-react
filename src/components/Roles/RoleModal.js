@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid, TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addRole } from '../../redux/rolesSlice';
+import { addRole, editRole } from '../../redux/rolesSlice';
 
 const style = {
     position: 'absolute',
@@ -22,8 +22,11 @@ const style = {
     p: 4,
 };
 
-const RoleModal = ({ open, setOpen }) => {
+const RoleModal = ({ open, setOpen, data }) => {
     const dispatch = useDispatch();
+    const initalValues = data
+        ? { roleLabel: data.label, roleKey: data.key }
+        : { roleLabel: '', roleKey: '' }
 
     return (
         <>
@@ -43,13 +46,9 @@ const RoleModal = ({ open, setOpen }) => {
                 <Fade in={open}>
                     <Box sx={style}>
                         <Formik
-                            initialValues={{ roleLabel: '', roleKey: '' }}
+                            initialValues={initalValues}
                             onSubmit={(values) => {
-                                dispatch(
-                                    addRole({
-                                        ...values
-                                    })
-                                );
+                                dispatch(data ? editRole({...values, id: data.id }) : addRole({ ...values }));
                                 setOpen(false)
                             }}
                             validationSchema={Yup.object().shape({
@@ -74,7 +73,7 @@ const RoleModal = ({ open, setOpen }) => {
 
                                         <Grid container spacing={2} flexDirection="column">
                                             <Typography id="transition-modal-title" variant="h6" component="h2">
-                                                Add Role
+                                                {`${data ? 'Update' : 'Add'} Role`}
                                             </Typography>
                                             <TextField
                                                 label="Role Label"

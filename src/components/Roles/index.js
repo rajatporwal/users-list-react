@@ -26,7 +26,6 @@ const Roles = () => {
             }
         </Paper>
         <RoleModal open={open} setOpen={setOpen} />
-       
     </>)
 }
 

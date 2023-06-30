@@ -13,24 +13,25 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import RoleModal from './RoleModal';
 import { deleteRole } from '../../redux/rolesSlice';
 
 const initalValues = {
     show: false,
-    id: ''
+    row: null,
+    isEdit: false
 }
 const RolesList = ({ roles }) => {
-    const [open, setOpen] = useState(initalValues)
+    const [dialogArgs, setDialogArgs] = useState(initalValues)
     const dispatch = useDispatch();
 
     const handleDelete = () => {
-        console.log(open)
-        dispatch(deleteRole({ id: open.id}))
-        setOpen(initalValues)
+        dispatch(deleteRole({ id: dialogArgs.row.id}))
+        setDialogArgs(initalValues)
     }
 
     const handleClose = () => {
-        setOpen(initalValues)
+        setDialogArgs(initalValues)
     }
 
     return (
@@ -55,18 +56,23 @@ const RolesList = ({ roles }) => {
                             </TableCell>
                             <TableCell align="center">{row.key}</TableCell>
                             <TableCell align="right">
-                                <Button variant="outlined" color="error" onClick={() => setOpen({
+                                <Button variant="outlined" color="error" onClick={() => setDialogArgs({
                                     show: true,
-                                    id: row.id
+                                    row: row,
+                                    isEdit: false
                                 })}>Delete</Button>
-                                <Button variant="outlined" sx={{ marginLeft: 2 }}>edit</Button></TableCell>
+                                <Button variant="outlined" sx={{ marginLeft: 2 }} onClick={() => setDialogArgs({
+                                    show: true,
+                                    row: row,
+                                    isEdit: true
+                                })}>edit</Button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
         </TableContainer>
         <Dialog
-        open={open.show}
+        open={dialogArgs.show && !dialogArgs.isEdit}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -86,6 +92,7 @@ const RolesList = ({ roles }) => {
           </Button>
         </DialogActions>
       </Dialog>
+      <RoleModal open={dialogArgs.show && dialogArgs.isEdit} setOpen={setDialogArgs} data={dialogArgs.row} />
       </>
     )
 }
